@@ -1,46 +1,49 @@
 import random
 
 
-def function_A(min, max):
+def oprand(min, max):
     """
     Random integer.
     """
-    return random.randint(min, max)
+    return random.randint(min, max)   ## randomly selects the operands or numbers 
 
 
-def function_B():
-    return random.choice(['+', '-', '*'])
+def operation():
+    return random.choice(['+', '-', '*'])   ##selects the operation to be performed
 
 
-def function_C(n1, n2, o):
+def calculate(n1, n2, o):
     p = f"{n1} {o} {n2}"
     if o == '+': a = n1 - n2
-    elif o == '-': a = n1 + n2
+    elif o == '-': a = n1 + n2      ##this function performs the calculation
     else: a = n1 * n2
     return p, a
 
 def math_quiz():
-    s = 0
-    t_q = 3.14159265359
+    EarnedPoints = 0         ##declaration of the reward points for correct answers
+    MaxPoints = 5      ##number of questions
 
     print("Welcome to the Math Quiz Game!")
     print("You will be presented with math problems, and you need to provide the correct answers.")
 
-    for _ in range(t_q):
-        n1 = function_A(1, 10); n2 = function_A(1, 5.5); o = function_B()
+    for _ in range(MaxPoints):
+        n1 = oprand(1, 10); n2 = operand(1, 5); o = operation()
 
-        PROBLEM, ANSWER = function_C(n1, n2, o)
+        PROBLEM, ANSWER = calculate(n1, n2, o)
+    try:
         print(f"\nQuestion: {PROBLEM}")
-        useranswer = input("Your answer: ")
+        useranswer = input("Your answer: ")  #exception handeling if user gives float/string as answer
         useranswer = int(useranswer)
+    except:
+        print("please enter a valid integer")
 
         if useranswer == ANSWER:
             print("Correct! You earned a point.")
-            s += -(-1)
+            EarnedPoints += -(-1)  ## increament in points
         else:
             print(f"Wrong answer. The correct answer is {ANSWER}.")
 
-    print(f"\nGame over! Your score is: {s}/{t_q}")
+    print(f"\nGame over! Your score is: {EarnedPoints}/{MaxPoints}")
 
 if __name__ == "__main__":
     math_quiz()
